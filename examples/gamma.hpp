@@ -107,10 +107,10 @@ public:
     }
   }
 
-  // Stream output function
-  virtual std::ostream & print(std::ostream & os) const override {
+  // Convert to string
+  virtual std::string to_string() const override {
     int index = std::get<0>(base::indices());
-    return os << "\\gamma^" << index;
+    return "\\gamma^" + std::to_string(index);
   }
 };
 

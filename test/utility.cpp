@@ -70,17 +70,11 @@ TEST_CASE("not_in_type_list<T, TypeList...> metafunction",
   CHECK(not_in_type_list<int, double, double>::value);
 }
 
-TEST_CASE("print_tuple()", "[print_tuple]") {
-  std::stringstream ss;
-
+TEST_CASE("tuple_to_string()", "[tuple_to_string]") {
   std::tuple<> t0;
-  print_tuple(ss, t0);
-  CHECK(ss.str() == "");
-
-  ss.str().clear();
+  CHECK(tuple_to_string(t0) == "");
   std::tuple<int, std::string, double> t(5, "Hello, World!", 1.2);
-  print_tuple(ss, t);
-  CHECK(ss.str() == "5,Hello, World!,1.2");
+  CHECK(tuple_to_string(t) == "5,Hello, World!,1.200000");
 }
 
 TEST_CASE("linear_function<T>", "[linear_function]") {

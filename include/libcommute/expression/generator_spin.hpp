@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <iostream>
 #include <memory>
+#include <string>
 #include <tuple>
 #include <utility>
 
@@ -174,23 +175,23 @@ protected:
       return this->c_ > s_g.c_;
   }
 
-  // Print to stream
-  virtual std::ostream & print(std::ostream & os) const override {
-    os << "S";
+  // Convert to string
+  virtual std::string to_string() const override {
+    std::string s("S");
     if(multiplicity_ != 2) {
       if(multiplicity_ % 2 == 0)
-        os << (multiplicity_ - 1) << "/2";
+        s += std::to_string(multiplicity_ - 1) + "/2";
       else
-        os << ((multiplicity_ - 1) / 2);
+        s += std::to_string((multiplicity_ - 1) / 2);
     }
     switch(this->c_) {
-      case spin_component::plus: os << "+"; break;
-      case spin_component::minus: os << "-"; break;
-      case spin_component::z: os << "z"; break;
+      case spin_component::plus: s += "+"; break;
+      case spin_component::minus: s += "-"; break;
+      case spin_component::z: s += "z"; break;
     }
-    os << "(";
-    print_tuple(os, this->indices_);
-    return os << ")";
+    s += "(";
+    s += tuple_to_string(this->indices_) + ")";
+    return s;
   }
 
 private:

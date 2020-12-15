@@ -21,6 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <memory>
+#include <string>
 #include <tuple>
 #include <utility>
 
@@ -102,11 +103,12 @@ protected:
       return this->dagger_ ? base::greater(g) : base::less(g);
   }
 
-  // Print to stream
-  virtual std::ostream & print(std::ostream & os) const override {
-    os << "A" << (this->dagger_ ? "+" : "") << "(";
-    print_tuple(os, this->indices_);
-    return os << ")";
+  // Convert to string
+  virtual std::string to_string() const override {
+    std::string s;
+    s += "A" + std::string(this->dagger_ ? "+" : "") + "(";
+    s += tuple_to_string(this->indices_) + ")";
+    return s;
   }
 };
 

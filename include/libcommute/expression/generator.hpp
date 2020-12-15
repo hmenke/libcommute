@@ -17,6 +17,7 @@
 
 #include <cassert>
 #include <stdexcept>
+#include <string>
 #include <iostream>
 #include <memory>
 #include <tuple>
@@ -126,7 +127,7 @@ public:
 
   // Stream output
   friend std::ostream & operator<<(std::ostream & os, generator const& g) {
-    return g.print(os);
+    return os << g.to_string();
   }
 
 protected:
@@ -144,11 +145,12 @@ protected:
   virtual bool greater(generator const& g) const {
     return indices_ > g.indices_;
   }
-  // Print to stream
-  virtual std::ostream & print(std::ostream & os) const {
-    os << "g^" << algebra_id() << "(";
-    print_tuple(os, this->indices_);
-    return os << ")";
+  // Convert to string
+  virtual std::string to_string() const {
+    std::string s("g^");
+    s += std::to_string(algebra_id()) + "(";
+    s += tuple_to_string(this->indices_) + ")";
+    return s;
   }
 };
 

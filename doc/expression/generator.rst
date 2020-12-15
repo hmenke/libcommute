@@ -198,14 +198,15 @@ mentioned in the 3rd column are defined in *<libcommute/algebra_ids.hpp>*.
     generators (write the result into :expr:`f`). The default implementation
     returns the generator itself.
 
+  .. function:: protected virtual std::string to_string() const
+
+    Returns a string representation of this generator. To be overridden by
+    derived classes.
+
   .. function:: friend std::ostream & operator<<\
                 (std::ostream & os, generator const& g)
 
-     Output stream insertion operator. Calls :expr:`g.print(os)`.
-
-  .. function:: protected virtual std::ostream & print(std::ostream & os) const
-
-    Virtual stream output function to be overridden by the derived classes.
+     Output stream insertion operator. Calls :expr:`os << g.to_string()`.
 
 
 .. struct:: template<typename T> linear_function

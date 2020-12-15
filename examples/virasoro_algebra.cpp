@@ -122,10 +122,10 @@ public:
     f.set(0, std::make_shared<generator_virasoro>(conj_n), 1);
   }
 
-  // Print L_n to stream
-  virtual std::ostream & print(std::ostream & os) const override {
+  // String representation of L_n
+  virtual std::string to_string() const override {
     int n = std::get<0>(base::indices_);
-    return os << "L(" << n << ")";
+    return "L(" + std::to_string(n) + ")";
   }
 };
 
