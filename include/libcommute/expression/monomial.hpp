@@ -77,7 +77,7 @@ public:
 
   // Construct from a list of smart pointers to generators
   monomial(std::initializer_list<gen_ptr_type> generators) {
-    for(auto const& p : generators) generators_.emplace_back(p->clone());
+    for(auto const& p : generators) generators_.emplace_back(p);
   }
 
   // Construct from a vector of pointers to generators
@@ -86,18 +86,9 @@ public:
   }
 
   // Value semantics
-  monomial(monomial const& m) {
-    generators_.reserve(m.generators_.size());
-    for(gen_ptr_type const& g : m.generators_)
-      generators_.emplace_back(g->clone());
-  }
+  monomial(monomial const& m) = default;
   monomial(monomial&&) noexcept = default;
-  monomial& operator=(monomial const& m) {
-    generators_.clear();
-    for(gen_ptr_type const& g : m.generators_)
-      generators_.emplace_back(g->clone());
-    return *this;
-  }
+  monomial& operator=(monomial const& m) = default;
   monomial& operator=(monomial&&) noexcept = default;
 
   // Number of generators in this monomial
@@ -259,7 +250,7 @@ public:
   // Append generators from a monomial
   void append(monomial const& m) {
     for(auto const& g : m.generators_)
-      generators_.emplace_back(g->clone());
+      generators_.emplace_back(g);
   }
   // Append generators from a monomial range
   void append(range_type const& r) {

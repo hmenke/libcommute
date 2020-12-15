@@ -309,7 +309,7 @@ TEST_CASE("Action of a mixed monomial", "[monomial_action]") {
   }
   SECTION("1 operator") {
     for(unsigned int i = 0; i < gens.size(); ++i) {
-      mon_type mon{gens[i]->clone()};
+      mon_type mon{gens[i]};
       check_monomial_action<ma_type>(mon, hs, ref_action, in_index_list);
     }
   }
@@ -317,7 +317,7 @@ TEST_CASE("Action of a mixed monomial", "[monomial_action]") {
     for(unsigned int i = 0; i < gens.size(); ++i) {
       for(unsigned int j = 0; j < gens.size(); ++j) {
         if(!(*gens[i] < *gens[j])) continue;
-        mon_type mon{gens[i]->clone(), gens[j]->clone()};
+        mon_type mon{gens[i], gens[j]};
         check_monomial_action<ma_type>(mon, hs, ref_action, in_index_list);
       }
     }
@@ -327,7 +327,7 @@ TEST_CASE("Action of a mixed monomial", "[monomial_action]") {
       for(unsigned int j = 0; j < gens.size(); ++j) {
         for(unsigned int k = 0; k < gens.size(); ++k) {
           if(!(*gens[i] < *gens[j]) || !(*gens[j] < *gens[k])) continue;
-          mon_type mon{gens[i]->clone(), gens[j]->clone(), gens[k]->clone()};
+          mon_type mon{gens[i], gens[j], gens[k]};
           check_monomial_action<ma_type>(mon, hs, ref_action, in_index_list);
         }
       }
@@ -341,10 +341,7 @@ TEST_CASE("Action of a mixed monomial", "[monomial_action]") {
             if(!(*gens[i] < *gens[j]) ||
                !(*gens[j] < *gens[k]) ||
                !(*gens[k] < *gens[l])) continue;
-            mon_type mon{gens[i]->clone(),
-                         gens[j]->clone(),
-                         gens[k]->clone(),
-                         gens[l]->clone()};
+            mon_type mon{gens[i], gens[j], gens[k], gens[l]};
             check_monomial_action<ma_type>(mon, hs, ref_action, in_index_list);
           }
         }

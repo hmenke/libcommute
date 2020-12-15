@@ -130,7 +130,7 @@ public:
   hilbert_space(hilbert_space const& hs) : bit_range_end_(hs.bit_range_end_) {
     for(auto const& es : hs.elementary_spaces_) {
       elementary_spaces_.emplace_hint(elementary_spaces_.end(),
-                                      es.first->clone(),
+                                      es.first,
                                       es.second);
     }
 
@@ -141,7 +141,7 @@ public:
     elementary_spaces_.clear();
     for(auto const& es : hs.elementary_spaces_) {
       elementary_spaces_.emplace_hint(elementary_spaces_.end(),
-                                      es.first->clone(),
+                                      es.first,
                                       es.second);
     }
     return *this;

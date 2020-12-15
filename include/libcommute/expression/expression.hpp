@@ -111,7 +111,7 @@ private:
     for(auto const& g : f.terms) {
       auto v = scalar_traits<ScalarType>::make_const(g.second);
       if(!scalar_traits<ScalarType>::is_zero(v))
-        *this += expression(v, monomial_t({g.first->clone()}));
+        *this += expression(v, monomial_t({g.first}));
     }
   }
 
