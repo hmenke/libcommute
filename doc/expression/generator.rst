@@ -38,6 +38,12 @@ __ CCR_and_CAR_
 Generators of different algebras always commute. In a canonically ordered
 product, generators are placed in the non-decreasing order of their algebra IDs.
 
+.. warning::
+
+  All generator objects, including the user-defined ones, must be immutable.
+  An attempt to declare a generator class with a mutable state will break
+  internal logic of the library.
+
 The following table summarizes information about predefined generators.
 
 .. list-table::
