@@ -48,8 +48,8 @@ public:
   elementary_space_gamma& operator=(elementary_space_gamma&&) noexcept
     = default;
 
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<elementary_space_gamma>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<elementary_space_gamma>(*this);
   }
 
   virtual int algebra_id() const override { return libcommute::gamma; }

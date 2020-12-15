@@ -35,7 +35,7 @@ namespace libcommute {
 //
 template<typename... IndexTypes>
 struct es_construction_failure : public std::runtime_error {
-  std::unique_ptr<generator<IndexTypes...>> generator_ptr;
+  std::shared_ptr<generator<IndexTypes...>> generator_ptr;
   inline static std::string make_what(generator<IndexTypes...> const& g) {
     std::stringstream ss;
     ss << "Cannot construct elementary space associated with algebra generator "
@@ -88,7 +88,7 @@ public:
                 std::forward<ArgsTail>(args_tail)...) {}
 
   template<typename... IndexTypes>
-  inline  std::unique_ptr<elementary_space<IndexTypes...>>
+  inline std::shared_ptr<elementary_space<IndexTypes...>>
   operator()(generator<IndexTypes...> const& g) const {
     if(g.algebra_id() == AlgebraID1)
       return base_head::operator()(g);
@@ -110,7 +110,7 @@ public:
   inline es_constructor_impl(Arg&& arg) : base(std::forward<Arg>(arg)) {}
 
   template<typename... IndexTypes>
-  inline  std::unique_ptr<elementary_space<IndexTypes...>>
+  inline std::shared_ptr<elementary_space<IndexTypes...>>
   operator()(generator<IndexTypes...> const& g) const {
     if(g.algebra_id() == AlgebraID)
       return base::operator()(g);
@@ -146,9 +146,11 @@ public:
   es_constructor() = default;
 
   template<typename... IndexTypes>
-  inline std::unique_ptr<elementary_space<IndexTypes...>>
+  inline std::shared_ptr<elementary_space<IndexTypes...>>
   operator()(generator<IndexTypes...> const& g) const {
-    return make_unique<elementary_space_fermion<IndexTypes...>>(g.indices());
+    return std::make_shared<elementary_space_fermion<IndexTypes...>>(
+      g.indices()
+    );
   }
 };
 
@@ -161,10 +163,12 @@ public:
   es_constructor(int bits_per_boson) : bits_per_boson_(bits_per_boson) {}
 
   template<typename... IndexTypes>
-  inline std::unique_ptr<elementary_space<IndexTypes...>>
+  inline std::shared_ptr<elementary_space<IndexTypes...>>
   operator()(generator<IndexTypes...> const& g) const {
-    return make_unique<elementary_space_boson<IndexTypes...>>(bits_per_boson_,
-                                                              g.indices());
+    return std::make_shared<elementary_space_boson<IndexTypes...>>(
+      bits_per_boson_,
+      g.indices()
+    );
   }
 };
 
@@ -173,10 +177,13 @@ public:
   es_constructor() = default;
 
   template<typename... IndexTypes>
-  inline std::unique_ptr<elementary_space<IndexTypes...>>
+  inline std::shared_ptr<elementary_space<IndexTypes...>>
   operator()(generator<IndexTypes...> const& g) const {
     double spin = dynamic_cast<generator_spin<IndexTypes...> const&>(g).spin();
-    return make_unique<elementary_space_spin<IndexTypes...>>(spin, g.indices());
+    return std::make_shared<elementary_space_spin<IndexTypes...>>(
+      spin,
+      g.indices()
+    );
   }
 };
 

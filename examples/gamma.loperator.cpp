@@ -45,8 +45,8 @@ public:
 
   // Virtual copy-constructor.
   // Make a smart pointer that manages a copy of this elementary space
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<elementary_space_gamma>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<elementary_space_gamma>(*this);
   }
 
   // Algebra ID, must be the same with generator_gamma::algebra_id()

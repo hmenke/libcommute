@@ -36,9 +36,9 @@ public:
   elementary_space_padding(Args&&... indices) :
     elementary_space<IndexTypes...>(std::forward<Args>(indices)...) {}
 
-  virtual std::unique_ptr<elementary_space<IndexTypes...>>
+  virtual std::shared_ptr<elementary_space<IndexTypes...>>
   clone() const override {
-    return make_unique<elementary_space_padding>(*this);
+    return std::make_shared<elementary_space_padding>(*this);
   }
   virtual int algebra_id() const override { return fermion-2; }
   virtual int n_bits() const override { return 2; }

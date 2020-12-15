@@ -63,8 +63,8 @@ public:
   virtual ~generator_spin() {}
 
   // Make a smart pointer that manages a copy of this generator
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<generator_spin>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<generator_spin>(*this);
   }
 
   // Generators with different indices or multiplicities commute.
@@ -132,7 +132,7 @@ public:
     (c_ == spin_component::plus ? spin_component::minus : spin_component::plus)
     );
     double spin = (multiplicity_-1)/2.0;
-    f.set(0, make_unique<generator_spin>(spin, new_c, base::indices_), 1);
+    f.set(0, std::make_shared<generator_spin>(spin, new_c, base::indices_), 1);
   }
 
 protected:

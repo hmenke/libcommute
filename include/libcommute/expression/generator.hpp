@@ -38,7 +38,7 @@ public:
   using index_types = std::tuple<IndexTypes...>;
 
   // Linear combination of generators
-  using linear_function_t = linear_function<std::unique_ptr<generator>>;
+  using linear_function_t = linear_function<std::shared_ptr<generator>>;
 
   template<typename... Args>
   generator(Args&&... indices) : indices_(std::forward<Args>(indices)...) {}
@@ -52,7 +52,7 @@ public:
   virtual int algebra_id() const = 0;
 
   // Make a smart pointer that manages a copy of this generator
-  virtual std::unique_ptr<generator> clone() const = 0;
+  virtual std::shared_ptr<generator> clone() const = 0;
 
   // Comparisons
   friend bool operator==(generator const& g1, generator const& g2) {
@@ -158,7 +158,7 @@ template<typename... IndexTypes>
 double
 swap_with(generator<IndexTypes...> const& g1,
           generator<IndexTypes...> const& g2,
-          linear_function<std::unique_ptr<generator<IndexTypes...>>> & f) {
+          linear_function<std::shared_ptr<generator<IndexTypes...>>> & f) {
   if(g1.algebra_id() == g2.algebra_id()) {
     return g1.swap_with(g2, f);
   } else {
@@ -174,7 +174,7 @@ template<typename... IndexTypes>
 bool
 simplify_prod(generator<IndexTypes...> const& g1,
               generator<IndexTypes...> const& g2,
-              linear_function<std::unique_ptr<generator<IndexTypes...>>> & f) {
+              linear_function<std::shared_ptr<generator<IndexTypes...>>> & f) {
   if(g1.algebra_id() == g2.algebra_id()) {
     return g1.simplify_prod(g2, f);
   } else {

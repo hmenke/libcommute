@@ -50,10 +50,8 @@ public:
 
   // Virtual copy-constructor.
   // Make a smart pointer that manages a copy of this generator
-  virtual std::unique_ptr<base> clone() const override {
-    // With C++14 or newer, libcommute::make_unique() will be resolved to
-    // std::make_unique(). Otherwise, a custom implementation will be used.
-    return make_unique<generator_gamma>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<generator_gamma>(*this);
   }
 
   // This function will be called for g1 = *this and g2 such that g1 > g2.

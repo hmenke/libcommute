@@ -19,23 +19,10 @@
 #include <utility>
 
 //
-// Collection of metafunctions backported from C++14/C++17/C++20
+// Collection of metafunctions backported from C++17/C++20
 //
 
 namespace libcommute {
-
-//
-// std::make_unique<T>() from C++14
-//
-
-#if __cplusplus < 201402L
-template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-  return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-#else
-using std::make_unique;
-#endif
 
 //
 // std::remove_cvref and std::remove_cvref_t from C++20

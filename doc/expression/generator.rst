@@ -89,7 +89,7 @@ mentioned in the 3rd column are defined in *<libcommute/algebra_ids.hpp>*.
 
     Index tuple type.
 
-  .. type:: linear_function_t = linear_function<std::unique_ptr<generator>>
+  .. type:: linear_function_t = linear_function<std::shared_ptr<generator>>
 
     Linear combination of generators. This type is used by various methods
     dealing with transformations of generator products.
@@ -107,7 +107,7 @@ mentioned in the 3rd column are defined in *<libcommute/algebra_ids.hpp>*.
   .. function:: generator& operator=(generator const&) = default
   .. function:: generator& operator=(generator&&) noexcept = default
   .. function:: virtual ~generator()
-  .. function:: virtual std::unique_ptr<generator> clone() const = 0
+  .. function:: virtual std::shared_ptr<generator> clone() const = 0
 
     Virtual copy-constructor. Makes a copy of this generator managed by a
     unique pointer.

@@ -22,15 +22,6 @@
 
 using namespace libcommute;
 
-TEST_CASE("make_unique<T>()", "[make_unique]") {
-  using T = std::pair<int, std::string>;
-  auto p = make_unique<T>(3, "test");
-
-  CHECK(std::is_same<decltype(p), std::unique_ptr<T>>::value);
-  CHECK(p->first == 3);
-  CHECK(p->second == "test");
-}
-
 TEST_CASE("remove_cvref<T> metafunction", "[remove_cvref]") {
   CHECK(std::is_same<typename remove_cvref<int>::type, int>::value);
   CHECK(std::is_same<typename remove_cvref<const int>::type, int>::value);

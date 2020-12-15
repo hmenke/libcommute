@@ -710,7 +710,7 @@ private:
       return;
     }
 
-    linear_function<std::unique_ptr<generator<IndexTypes...>>> f;
+    linear_function<std::shared_ptr<generator<IndexTypes...>>> f;
     auto it = m.begin(), end_it = m.end();
     auto next_it = it + 1;
     int power = 1;
@@ -956,7 +956,7 @@ public:
 
   using iterator_category = std::bidirectional_iterator_tag;
   using difference_type = std::ptrdiff_t;
-  using pointer = std::unique_ptr<value_type>;
+  using pointer = std::shared_ptr<value_type>;
   using reference = value_type;
 
   explicit const_iterator(map_it const& m_it) : m_it_(m_it) {}
@@ -990,7 +990,7 @@ public:
   // Dereference
   reference operator*() const { return {m_it_->first, m_it_->second}; }
   pointer operator->() const {
-    return make_unique<value_type>(m_it_->first, m_it_->second);
+    return std::make_shared<value_type>(m_it_->first, m_it_->second);
   }
 
   // swap()

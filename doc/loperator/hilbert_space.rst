@@ -310,7 +310,7 @@ the elementary space to algebra generators acting in it.
   .. function:: elementary_space& operator=(elementary_space&&) noexcept \
                 = default
   .. function:: virtual ~elementary_space()
-  .. function:: virtual std::unique_ptr<elementary_space> clone() const = 0
+  .. function:: virtual std::shared_ptr<elementary_space> clone() const = 0
 
     Virtual copy-constructor. Makes a copy of this elementary space managed by a
     unique pointer.
@@ -479,7 +479,7 @@ argument. It is possible to customize the translation process by giving
   struct my_es_constructor {
 
     template<typename... IndexTypes>
-    std::unique_ptr<elementary_space<IndexTypes...>>
+    std::shared_ptr<elementary_space<IndexTypes...>>
     operator()(generator<IndexTypes...> const& g) const {
       //
       // Create an elementary space associated with 'g' and return it
@@ -524,7 +524,7 @@ can be achieved in a few steps by means of a special utility class
       es_constructor() = default;
 
       template<typename... IndexTypes>
-      std::unique_ptr<elementary_space<IndexTypes...>>
+      std::shared_ptr<elementary_space<IndexTypes...>>
       operator()(generator<IndexTypes...> const& g) const {
         //
         // Create an elementary space associated with 'g' and return it

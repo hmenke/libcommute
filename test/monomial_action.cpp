@@ -122,7 +122,7 @@ TEST_CASE("Action of a mixed monomial", "[monomial_action]") {
   // Algebra generators
   //
 
-  std::vector<std::unique_ptr<generator<int>>> gens;
+  std::vector<std::shared_ptr<generator<int>>> gens;
   gens.emplace_back(make_fermion(true, 0).clone());
   gens.emplace_back(make_fermion(false, 0).clone());
   gens.emplace_back(make_fermion(true, 1).clone());

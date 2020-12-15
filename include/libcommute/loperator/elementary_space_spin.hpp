@@ -50,8 +50,8 @@ public:
   elementary_space_spin& operator=(elementary_space_spin&&) noexcept = default;
 
   // Make a smart pointer that manages a copy of this elementary space
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<elementary_space_spin>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<elementary_space_spin>(*this);
   }
 
   // ID of the algebra this elementary space is associated with

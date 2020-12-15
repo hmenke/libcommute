@@ -26,7 +26,7 @@ are always canonically ordered, that need not be true in general.
 
   .. type:: index_types = std::tuple<IndexTypes...>
   .. type:: generator_type = generator<IndexTypes...>
-  .. type:: gen_ptr_type = std::unique_ptr<generator_type>
+  .. type:: gen_ptr_type = std::shared_ptr<generator_type>
 
   .. rubric:: Constructors
 

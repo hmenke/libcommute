@@ -42,7 +42,7 @@ class monomial {
   template<typename GenType1, typename... GenTypesTail>
   void constructor_impl(GenType1 && generator, GenTypesTail&&... more_gens) {
     using gen1_t = typename std::remove_reference<GenType1>::type;
-    generators_.emplace_back(make_unique<gen1_t>(generator));
+    generators_.emplace_back(std::make_shared<gen1_t>(generator));
     constructor_impl(std::forward<GenTypesTail>(more_gens)...);
   }
   void constructor_impl() {}
@@ -56,7 +56,7 @@ public:
 
   using index_types = std::tuple<IndexTypes...>;
   using generator_type = generator<IndexTypes...>;
-  using gen_ptr_type = std::unique_ptr<generator_type>;
+  using gen_ptr_type = std::shared_ptr<generator_type>;
 
   // Construct empty (constant) monomial
   monomial() = default;
@@ -293,7 +293,7 @@ public:
   using iterator_category = std::random_access_iterator_tag;
   using value_type = generator_type const&;
   using difference_type = std::ptrdiff_t;
-  using pointer = std::unique_ptr<generator_type> const&;
+  using pointer = std::shared_ptr<generator_type> const&;
   using reference = generator_type const&;
 
   explicit const_iterator(vector_it const& v_it) : v_it_(v_it) {}

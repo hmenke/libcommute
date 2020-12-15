@@ -52,8 +52,8 @@ public:
   virtual ~generator_boson() {}
 
   // Make a smart pointer that manages a copy of this generator
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<generator_boson>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<generator_boson>(*this);
   }
 
   // c = 1, f(g) = \delta(g1, g2^+)
@@ -71,7 +71,7 @@ public:
 
   // Return the Hermitian conjugate of this generator via f
   virtual void conj(linear_function_t & f) const override {
-    f.set(0, make_unique<generator_boson>(!dagger_, base::indices_), 1);
+    f.set(0, std::make_shared<generator_boson>(!dagger_, base::indices_), 1);
   }
 
 protected:

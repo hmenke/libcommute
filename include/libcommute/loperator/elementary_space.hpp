@@ -45,7 +45,7 @@ public:
   virtual ~elementary_space() {}
 
   // Make a smart pointer that manages a copy of this elementary space
-  virtual std::unique_ptr<elementary_space> clone() const = 0;
+  virtual std::shared_ptr<elementary_space> clone() const = 0;
 
   // Comparisons
   friend bool operator==(elementary_space const& es1,

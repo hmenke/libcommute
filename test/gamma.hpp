@@ -46,8 +46,8 @@ public:
   virtual ~generator_gamma() {}
 
   // Make a smart pointer that manages a copy of this generator
-  virtual std::unique_ptr<base> clone() const override {
-    return make_unique<generator_gamma>(*this);
+  virtual std::shared_ptr<base> clone() const override {
+    return std::make_shared<generator_gamma>(*this);
   }
 
   // c = -1, f(g) = 2\eta(g1, g2)
