@@ -39,23 +39,14 @@ are always canonically ordered, that need not be true in general.
 
     Construct a non-empty monomial from a list of generators.
 
-  .. function:: monomial(std::initializer_list<generator_type*> generators)
-
-    Construct a monomial from a list of pointers to generators using the
-    list initialization syntax. This constructor creates copies of the
-    generators by calling :func:`generator::clone()`.
-
-  .. function:: monomial(std::vector<generator_type*> generators)
-
-    Construct a monomial from a vector of pointers to generators. This
-    constructor creates copies of the generators by calling
-    :func:`generator::clone()`.
-
   .. function:: monomial(std::initializer_list<gen_ptr_type> generators)
 
     Construct a monomial from a list of smart pointers to generators using the
-    list initialization syntax. This constructor creates copies of the
-    generators by calling :func:`generator::clone()`.
+    list initialization syntax.
+
+  .. function:: monomial(std::vector<gen_ptr_type> const& generators)
+
+    Construct a monomial from a vector of smart pointers to generators.
 
   .. rubric:: Copy/move-constructors and assignments
 

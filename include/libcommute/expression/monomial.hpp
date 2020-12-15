@@ -70,19 +70,14 @@ public:
     constructor_impl(std::forward<GenTypes>(generators)...);
   }
 
-  // Construct from a list of pointers to generators
-  monomial(std::initializer_list<generator_type*> generators) {
-    for(auto p : generators) generators_.emplace_back(p->clone());
-  }
-
   // Construct from a list of smart pointers to generators
   monomial(std::initializer_list<gen_ptr_type> generators) {
     for(auto const& p : generators) generators_.emplace_back(p);
   }
 
-  // Construct from a vector of pointers to generators
-  monomial(std::vector<generator_type*> const& generators) {
-    for(auto p : generators) generators_.emplace_back(p->clone());
+  // Construct from a list of smart pointers to generators
+  monomial(std::vector<gen_ptr_type> const& generators) {
+    for(auto const& p : generators) generators_.emplace_back(p);
   }
 
   // Value semantics

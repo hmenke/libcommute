@@ -21,6 +21,7 @@
 #include <libcommute/expression/generator_spin.hpp>
 #include <libcommute/expression/monomial.hpp>
 
+#include <memory>
 #include <vector>
 
 using namespace libcommute;
@@ -38,7 +39,12 @@ TEST_CASE("Monomials", "[monomial]") {
   auto Sp_i = make_spin(spin_component::plus, "i", 0);
   auto S1z_j = make_spin(1, spin_component::z, "j", 0);
 
-  std::vector<gen_type*> basis_gens = {&Cdag_dn, &A_y, &Sp_i, &S1z_j};
+  std::vector<std::shared_ptr<gen_type>> basis_gens = {
+    Cdag_dn.clone(),
+    A_y.clone(),
+    Sp_i.clone(),
+    S1z_j.clone()
+  };
   std::vector<mon_type> monomials;
 
   // Monomial of order 0
